@@ -2,7 +2,7 @@
 
 This project is a simple Retrieval-Augmented Generation (RAG) application that allows you to query a PDF and receive answers grounded in the PDF's content. It uses embeddings to chunk and store the PDF data in a vector database, then queries it using a local LLM.
 
-<img src="RAG_frontend.png" alt="Screenshot" width="1000">
+<img src="RAG_frontend2.png" alt="Screenshot" width="1000">
 
 ## Features
 - Upload and index PDF documents.
