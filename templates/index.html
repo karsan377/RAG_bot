@@ -13,7 +13,10 @@
 </head>
 <body>
   <h1>RAG QA Demo</h1>
-
+  <form action="/upload_pdf" method="post" enctype="multipart/form-data">
+    <input type="file" name="pdf_file" accept="application/pdf" />
+    <button type="submit">Upload PDF</button>
+  </form>
   <div class="section">
     <input type="text" id="question" placeholder="Enter your question">
     <button onclick="submitQuestion()">Ask</button>
