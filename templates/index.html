@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAG QA Interface</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 2rem; }
+  input, button { padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
+  .section { margin-bottom: 2rem; }
+  .chunk { background: #f4f4f4; padding: 0.5rem; margin: 0.25rem 0; border-radius: 4px; }
+</style>
+</head>
+<body>
+  <h1>RAG QA Demo</h1>
+
+  <div class="section">
+    <input type="text" id="question" placeholder="Enter your question">
+    <button onclick="submitQuestion()">Ask</button>
+  </div>
+
+  <div class="section">
+    <h2>Answer</h2>
+    <div id="answer"></div>
+  </div>
+
+  <div class="section">
+    <h2>Chunks</h2>
+    <div id="chunks"></div>
+  </div>
+
+<script>
+async function submitQuestion() {
+    const question = document.getElementById("question").value;
+    const response = await fetch("/query", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+    });
+    const data = await response.json();
+
+    // Display the LLM answer
+    document.getElementById("answer").innerText = data.answer;
+
+    // Display each chunk properly
+    const chunksDiv = document.getElementById("chunks");
+    chunksDiv.innerHTML = "";
+
+    data.chunks.forEach(chunk => {
+        const div = document.createElement("div");
+        div.className = "chunk";
+
+        // If chunk is an object with page_content, use that
+        if (typeof chunk === "object" && chunk.page_content) {
+            div.innerText = chunk.page_content;
+        } else {
+            div.innerText = chunk; // fallback
+        }
+
+        chunksDiv.appendChild(div);
+    });
+}
+</script>
+
+
+</body>
+</html>
