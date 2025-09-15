@@ -30,6 +30,7 @@ pip install -r requirements.txt
 ```
 
 ## Running Project
+- Start Ollama server: ollama serve   
 - CLI query: python query_data.py "What is a graph?"
 - Start web app: python app.py
 - Open web app (paste in browser): http://127.0.0.1:5000
